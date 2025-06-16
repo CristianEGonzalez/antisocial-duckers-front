@@ -25,6 +25,9 @@ export const Publicacion = ({ nickName, titulo, contenido, urlVerMas, imagenes, 
           ))}
         </div>
         {/* Controles de navegación del carrusel (anterior/siguiente) */}
+
+        {/* ARREGLAR (CAMBIA SOLO LA PRIMERA TARJETA (data-bs caca)) */}
+
         <button className="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Anterior</span>
