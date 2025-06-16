@@ -5,6 +5,7 @@ function PublicacionesRecientes() {
         <div className="bg-success bg-gradient" style={{ display: 'flex', flexWrap: 'wrap row', justifyContent: "space-between"}}>
             {/* Esto debería hacer MAP a las publicaciones recientes */}
             <Publicacion
+                idPublicacion={"jo9c67f435"}
                 nickName={"Pez"}
                 titulo="Hola Mundo"
                 contenido={"Bienvenidos a la casa de la astrología"}
@@ -14,6 +15,7 @@ function PublicacionesRecientes() {
                 urlVerMas={"https://www.google.com.ar"}
             />
             <Publicacion
+                idPublicacion={"vfdo7h64eh5"}
                 nickName={"Pez"}
                 titulo="Hola Mundo"
                 contenido={"Bienvenidos a la casa de la astrología"}
@@ -23,6 +25,7 @@ function PublicacionesRecientes() {
                 urlVerMas={"https://www.google.com.ar"}
             />
             <Publicacion
+                idPublicacion={"fq43jo8734"}
                 nickName={"Pez"}
                 titulo="Hola Mundo"
                 contenido={"Bienvenidos a la casa de la astrología"}
@@ -32,6 +35,7 @@ function PublicacionesRecientes() {
                 urlVerMas={"https://www.google.com.ar"}
             />
             <Publicacion
+                idPublicacion={"fgdae4q3wa"}
                 nickName={"Pez"}
                 titulo="Hola Mundo"
                 contenido={"Bienvenidos a la casa de la astrología"}

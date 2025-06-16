@@ -1,5 +1,5 @@
 // Componente funcional de React para la tarjeta con carrusel
-export const Publicacion = ({ nickName, titulo, contenido, urlVerMas, imagenes, etiquetas, cantidadComentarios }) => {
+export const Publicacion = ({ idPublicacion, nickName, titulo, contenido, urlVerMas, imagenes, etiquetas, cantidadComentarios }) => {
   return (
     // Contenedor principal de la tarjeta con estilos de Bootstrap
     <div className="card" style={{ width: '18rem', borderRadius: '1rem', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', margin: "10px" }}>
@@ -11,7 +11,7 @@ export const Publicacion = ({ nickName, titulo, contenido, urlVerMas, imagenes, 
       </div>
 
       {/* Carrusel de imágenes */}
-      <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel">
+      <div id={idPublicacion} className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           {imagenes.map((image, index) => (
             // Cada elemento del carrusel
@@ -25,14 +25,11 @@ export const Publicacion = ({ nickName, titulo, contenido, urlVerMas, imagenes, 
           ))}
         </div>
         {/* Controles de navegación del carrusel (anterior/siguiente) */}
-
-        {/* ARREGLAR (CAMBIA SOLO LA PRIMERA TARJETA (data-bs caca)) */}
-
-        <button className="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+        <button className="carousel-control-prev" type="button" data-bs-target={`#${idPublicacion}`} data-bs-slide="prev">
           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Anterior</span>
         </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+        <button className="carousel-control-next" type="button" data-bs-target={`#${idPublicacion}`} data-bs-slide="next">
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
           <span className="visually-hidden">Siguiente</span>
         </button>
