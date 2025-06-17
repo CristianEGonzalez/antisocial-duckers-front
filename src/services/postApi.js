@@ -1,16 +1,16 @@
 import { apiFetch } from './apiFetch';
 
-export const getPublicaciones = async () => {
+export const obtenerPublicaciones = async () => {
   return apiFetch('posts');
 };
 
 // crear ruta en backend
-export const getPublicacionesById = async (id) => {
+export const obtenerPublicacionesById = async (id) => {
   return apiFetch(`posts/${id}`);
 };
 
 // no se como usar este, consultar con el profesor
-export const getPublicacionesByUserId = async (userId) => {
+export const obtenerPublicacionesByUserId = async (userId) => {
   return apiFetch(`posts?userId=${userId}`);
 };
 

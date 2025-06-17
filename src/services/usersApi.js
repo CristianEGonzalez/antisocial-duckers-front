@@ -1,11 +1,11 @@
 import { apiFetch } from './apiFetch';
 
-export const getUsuario = async () => {
+export const obtenerUsuarios = async () => {
   return apiFetch('users');
 };
 
 // crear ruta en backend
-export const getUsuarioById = async (id) => {
+export const obtenerUsuarioPorId = async (id) => {
   return apiFetch(`users/${id}`);
 };
 

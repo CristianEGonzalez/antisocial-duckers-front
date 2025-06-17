@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Publicacion } from "../Publicacion/Publicacion";
-import { getPublicaciones /*, getPublicacionesById*/ } from '../../services/postApi.js';
+import { obtenerPublicaciones /*, obtenerPublicacionesById*/ } from '../../services/postApi.js';
 
 const obtenerPublicacionesRecientes = (publicaciones, cantidad) => {
   if (!publicaciones || publicaciones.length === 0) {
@@ -25,7 +25,7 @@ function PublicacionesRecientes() {
     const fetchPublicaciones = async () => {
       try {
         setCargando(true);
-        const publicaciones = await getPublicaciones();
+        const publicaciones = await obtenerPublicaciones();
         
         // --- Definimos cuántas publicaciones recientes se mostrarán en el home ---
         const publicacionesRecientes = obtenerPublicacionesRecientes(publicaciones, 8);
@@ -68,7 +68,7 @@ function PublicacionesRecientes() {
           imagenes={post.Post_Images.map(img => img.url)}
           etiquetas={post.Tags.map(tag => tag.tag)}
           cantidadComentarios={post.Comments.length}
-          urlVerMas={`/post/${post.id}`} // getPublicacionesById(post.id)
+          urlVerMas={`/post/${post.id}`} // obtenerPublicacionesById(post.id)
         />
       ))}
     </section>
