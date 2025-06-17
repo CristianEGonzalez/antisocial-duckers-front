@@ -99,10 +99,11 @@ export const Publicacion = ({
         <div className="text-muted mb-3">
           Comentarios: <span className="fw-bold">{cantidadComentarios}</span>
         </div>
-
-        <a href={urlVerMas} className="btn btn-primary">
-          Ver Más
-        </a>
+        <div class="d-grid gap-2 col-12 mx-auto">
+          <a href={urlVerMas} className="btn btn-outline-success">
+            Ver Más
+          </a>
+        </div>
       </div>
     </div>
   );
