@@ -10,8 +10,8 @@ function FormRegistro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError(null);
-    setMensajeExito(null);
+    setError(null); // Es Necesario?
+    setMensajeExito(null); //Es necesario?
 
     try {
       // Validar si el nickname ya existe
@@ -28,8 +28,7 @@ function FormRegistro() {
       const nuevoUsuario = { nickName: nickname, email: email};
       const usuarioRegistrado = await crearUsuario(nuevoUsuario);
 
-      console.log("Usuario registrado con éxito:", usuarioRegistrado);
-      setMensajeExito("¡Registro exitoso! Ahora puedes iniciar sesión.");
+      setMensajeExito(`¡Registro exitoso ${usuarioRegistrado.nickName}! Ahora puedes iniciar sesión.`);
       
       // Opcional: Loguear al usuario directamente después del registro
       // iniciarSesion(usuarioRegistrado); 
