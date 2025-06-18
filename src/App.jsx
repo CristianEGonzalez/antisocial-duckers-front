@@ -1,19 +1,24 @@
-import FormRegistro from './components/FormRegistro/FormRegistro';
+import { Navigate, Route, Routes } from "react-router-dom"
 import { Header } from './components/Header/Header';
-// import { Publicacion } from './components/Publicacion/Publicacion';
-import PublicacionesRecientes from './components/PublicacionesRecientes/PublicacionesRecientes';
+import Home from "../src/pages/Home"
+import Login from "../src/pages/Login"
+import Perfil from "../src/pages/Perfil"
+import DetallePublicacion from "../src/pages/DetallePublicacion"
+import Registro from "../src/pages/Registro"
+
 
 const App = () => {
   return (
     <>
       <Header/>
-      <main className="container mt-4">
-        <PublicacionesRecientes/>
-
-        <FormRegistro/>
-
-      </main>
-
+      <Routes>
+        <Route path="/" element={ <Home /> } />
+        <Route path="/login" element={ <Login /> } />
+        <Route path="/perfil" element={ <Perfil /> } />
+        <Route path="/registro" element={ <Registro /> } />
+        <Route path="/detallepublicacion/:id" element={ <DetallePublicacion /> } />
+        <Route path="/*" element={ <Navigate to="/" /> } />
+      </Routes>
     </>
   );
 };

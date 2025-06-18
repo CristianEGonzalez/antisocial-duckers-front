@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export const Menu = () => {
   const [expanded, setExpanded] = useState(false);
@@ -22,16 +23,16 @@ export const Menu = () => {
       >
         <ul className="navbar-nav">
           <li className="nav-item text-end">
-            <a className="nav-link text-success" href="#usuarios">Usuarios</a>
+            <NavLink to="/"  className="nav-link text-success" >Home</NavLink>
           </li>
           <li className="nav-item text-end">
-            <a className="nav-link text-success" href="#publicaciones">Publicaciones</a>
+            <NavLink to="/login"  className="nav-link text-success" >Login</NavLink>
           </li>
           <li className="nav-item text-end">
-            <a className="nav-link text-success" href="#comentarios">Comentarios</a>
+            <NavLink to="/registro"  className="nav-link text-success" >Registro</NavLink>
           </li>
           <li className="nav-item text-end">
-            <a className="nav-link text-success" href="#etiquetas">Etiquetas</a>
+            <NavLink to="/perfil"  className="nav-link text-success" >Perfil</NavLink>
           </li>
         </ul>
       </div>
