@@ -7,11 +7,11 @@ const obtenerPublicacionesRecientes = (publicaciones, cantidad) => {
     return [];
   }
   const publicacionesOrdenadas = [...publicaciones].sort((a, b) => {
-    const datoA = new Date(a.updatedAt);
-    const datoB = new Date(b.updatedAt);
+    const fechaA = new Date(a.updatedAt);
+    const fechaB = new Date(b.updatedAt);
 
     // Ordenar de forma descendente (más reciente primero)
-    return datoB.getTime() - datoA.getTime();
+    return fechaB.getTime() - fechaA.getTime();
   });
   return publicacionesOrdenadas.slice(0, cantidad);
 };

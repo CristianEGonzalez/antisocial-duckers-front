@@ -10,8 +10,9 @@ function FormRegistro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError(null); // Es Necesario?
-    setMensajeExito(null); //Es necesario?
+    //Para que se limpien los mensajes de error o éxito en cada submit
+    setError(null); 
+    setMensajeExito(null);
 
     try {
       // Validar si el nickname ya existe
