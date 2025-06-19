@@ -9,6 +9,7 @@ export const Publicacion = ({
   etiquetas,
   cantidadComentarios,
 }) => {
+  const contenidoResumido = contenido.slice(0,50)
   return (
     // Contenedor principal de la tarjeta con estilos de Bootstrap
     <div
@@ -77,11 +78,13 @@ export const Publicacion = ({
         </>)}
 
       </div>
-
+          
       {/* Cuerpo de la tarjeta */}
       <div className="card-body">
         <h5 className="card-titulo">{titulo}</h5>
-        <p className="card-text">{contenido}</p>
+        <p className="card-text">
+          {contenidoResumido}{contenido.length > 50 && <span>...</span>}
+        </p>
 
         {/* Contenedor para las etiquetas (etiquetas) */}
         <div className="mt-3 mb-2 d-flex flex-wrap gap-2">
