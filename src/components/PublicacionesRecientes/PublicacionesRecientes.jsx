@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Publicacion } from "../Publicacion/Publicacion";
-import { obtenerPublicaciones /*, obtenerPublicacionesById*/ } from '../../services/postApi.js';
+import { obtenerPublicaciones ,obtenerPublicacionesById } from '../../services/postApi.js';
 
 const obtenerPublicacionesRecientes = (publicaciones, cantidad) => {
   if (!publicaciones || publicaciones.length === 0) {
@@ -68,7 +68,7 @@ function PublicacionesRecientes() {
           imagenes={post.Post_Images.map(img => img.url)}
           etiquetas={post.Tags.map(tag => tag.tag)}
           cantidadComentarios={post.Comments.length}
-          urlVerMas={`/post/${post.id}`} // obtenerPublicacionesById(post.id)
+          urlVerMas={obtenerPublicacionesById(post.id)} //obtenerPublicacionesById(post.id)
         />
       ))}
     </section>
