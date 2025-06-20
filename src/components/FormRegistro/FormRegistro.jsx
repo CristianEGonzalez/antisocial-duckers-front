@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { obtenerUsuarios, crearUsuario } from '../../services/usersApi';
+import { obtenerUsuarios, crearUsuario } from '../../services/userApi';
 
 function FormRegistro() {
   const [nickname, setNickname] = useState('');

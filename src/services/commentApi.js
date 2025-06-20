@@ -1,8 +1,7 @@
 import { apiFetch } from './apiFetch';
 
-// crear ruta en backend
-export const getComentarioDePublicacion = async (postId) => {
-  return apiFetch(`posts/${postId}/comments`); 
+export const obtenerComentariosDeUnaPublicacion = async (postId) => {
+  return apiFetch(`comments/${postId}`);
 };
 
 export const crearComentario = async (commentData) => {

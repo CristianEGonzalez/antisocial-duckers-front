@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; //para obtener el ID de la URL
-import { obtenerPublicacionesById } from '../../services/postApi';
+import { obtenerPublicacionPorId } from '../../services/postApi';
+import { obtenerUsuarioPorId } from '../../services/userApi'
+import { obtenerComentariosDeUnaPublicacion } from '../../services/commentApi'
 
 export const DetallePublicacion = () => {
-  //'id' de los parámetros de la urñ
+  //'id' de los parámetros de la url
   const { id } = useParams(); 
   const [publicacion, setPublicacion] = useState(null);
+  const [usuario, setUsuario] = useState(null)
+  const [comentarios, setComentarios] = useState(null)
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,8 +17,13 @@ export const DetallePublicacion = () => {
     const fetchPublicacion = async () => {
       try {
         setCargando(true); 
-        const data = await obtenerPublicacionesById(id); 
-        setPublicacion(data);
+        const unaPublicacion = await obtenerPublicacionPorId(id); 
+        const unUsuario = await obtenerUsuarioPorId(unaPublicacion.userId);
+        const listaDeComentarios = await obtenerComentariosDeUnaPublicacion(unaPublicacion.id)
+        setPublicacion(unaPublicacion);
+        setUsuario(unUsuario);
+        setComentarios(listaDeComentarios)
+
       } catch (err) {
         setError("Error al cargar la publicación: " + (err.message || 'Por favor, intenta de nuevo más tarde.'));
       } finally {
@@ -24,6 +33,7 @@ export const DetallePublicacion = () => {
 
     fetchPublicacion(); 
   }, [id]); // se vuelve a ejecutar si cambia el id
+
 
   if (cargando) {
     return <div className="text-center my-4 fs-5">Cargando publicación...</div>;
@@ -37,10 +47,6 @@ export const DetallePublicacion = () => {
     );
   }
 
-  if (!publicacion) {
-    return <div className="text-center my-4 fs-5">Publicación no encontrada.</div>;
-  }
-
   // Verifica si la publicación tiene imágenes para mostrar el carrusel.
   const tieneImagenes = publicacion.Post_Images && publicacion.Post_Images.length > 0;
 
@@ -50,7 +56,7 @@ export const DetallePublicacion = () => {
         <div className="p-4 border-bottom border-light">
           <p className="text-muted mb-0">
             Publicado por:{" "}
-            <span className="fw-medium text-dark">@{publicacion.User.nickName}</span>
+            <span className="fw-medium text-dark">@{usuario.nickName}</span>
           </p>
         </div>
 
@@ -144,21 +150,13 @@ export const DetallePublicacion = () => {
           <h3 className="h3 text-dark mb-3">Comentarios ({publicacion.Comments ? publicacion.Comments.length : 0})</h3>
           {publicacion.Comments && publicacion.Comments.length > 0 ? (
             <div className="list-group">
-              {publicacion.Comments.map(comment => (
+              {comentarios.map(comentario => (
                 // Renderiza cada comentario. Se podría reemplazar por un componente <Comentario />
-                <div key={comment.id} className="list-group-item list-group-item-action bg-light p-3 rounded-3 shadow-sm border border-light mb-3">
+                <div key={comentario.id} className="list-group-item list-group-item-action bg-light p-3 rounded-3 shadow-sm border border-light mb-3">
                   <div className="d-flex w-100 justify-content-between mb-2">
-                    <h5 className="h5 text-dark mb-0">@{comment.User.nickName}</h5>
-                    <small className="text-muted">
-                      {/* Formatea la fecha del comentario */}
-                      {new Date(comment.createdAt).toLocaleDateString('es-AR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </small>
+                    <h5 className="h5 text-dark mb-0">@{comentario.userId}</h5>
                   </div>
-                  <p className="mb-0 text-dark">{comment.content}</p>
+                  <p className="mb-0 text-dark">{comentario.comment}</p>
                 </div>
               ))}
             </div>

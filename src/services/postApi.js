@@ -5,12 +5,12 @@ export const obtenerPublicaciones = async () => {
 };
 
 // crear ruta en backend
-export const obtenerPublicacionesById = async (id) => {
+export const obtenerPublicacionPorId = async (id) => {
   return apiFetch(`posts/${id}`);
 };
 
 // no se como usar este, consultar con el profesor
-export const obtenerPublicacionesByUserId = async (userId) => {
+export const obtenerPublicacionesPorUserId = async (userId) => {
   return apiFetch(`posts?userId=${userId}`);
 };
 

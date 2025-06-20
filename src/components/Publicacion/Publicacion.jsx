@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // Componente funcional de React para la tarjeta con carrusel
 export const Publicacion = ({
   idPublicacion,
@@ -117,9 +117,9 @@ export const Publicacion = ({
           {/* <a href={urlVerMas} className="btn btn-outline-success"> Antes estaba con una etiqueta a 
             Ver Más
           </a> */}
-          <NavLink to={urlVerMas} className="btn btn-outline-success">
+          <Link to={urlVerMas} className="btn btn-outline-success">
             Ver Más
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>
