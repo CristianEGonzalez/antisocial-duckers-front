@@ -1,8 +1,13 @@
+ //Hacer que el userId que comenta sea el del usuario logueado!!!!!!!!!!!!!!!!!!
+ //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; //para obtener el ID de la URL
 import { obtenerPublicacionPorId } from '../../services/postApi';
 import { obtenerUsuarioPorId } from '../../services/userApi'
 import { obtenerComentariosDeUnaPublicacion } from '../../services/commentApi'
+import EscribirComentario from '../EscribirComentario/EscribirComentario'
+import './DetallePublicacion.css';
 
 export const DetallePublicacion = () => {
   //'id' de los parámetros de la url
@@ -50,6 +55,13 @@ export const DetallePublicacion = () => {
   // Verifica si la publicación tiene imágenes para mostrar el carrusel.
   const tieneImagenes = publicacion.Post_Images && publicacion.Post_Images.length > 0;
 
+
+  const handleComentarioCreado = (nuevoComentario) => {
+        setComentarios(prevComentarios => [nuevoComentario, ...prevComentarios]); // Agrega al principio
+  };
+
+
+
   return (
     <div className="bg-light d-flex flex-column align-items-center py-4 px-3" style={{ minHeight: '100vh' }}>
       <div className="bg-white rounded-3 shadow-lg overflow-hidden w-100" style={{ maxWidth: '960px' }}>
@@ -65,7 +77,7 @@ export const DetallePublicacion = () => {
           <div id={`carousel-${publicacion.id}`} className="carousel slide w-100" data-bs-ride="carousel">
             <div className="carousel-inner rounded-md">
               {publicacion.Post_Images.map((image, index) => (
-                <div
+                <div 
                   className={`carousel-item ${index === 0 ? "active" : ""}`}
                   data-bs-interval="3000" 
                   key={index}
@@ -73,7 +85,7 @@ export const DetallePublicacion = () => {
                   <img
                     src={image.url}
                     className="d-block w-100 object-cover"
-                    style={{ height: "500px" }}
+                    
                     alt={`Imagen ${index + 1} de la publicación`}
                   />
                 </div>
@@ -145,16 +157,21 @@ export const DetallePublicacion = () => {
           )}
 
           <hr className="my-4" />
-
+          
           {/*Comentarios */}
+          <EscribirComentario
+                        postId={publicacion.id}
+                        onComentarioCreado={handleComentarioCreado}
+                        userId={usuario.id} //Hacer que este userId sea el del usuario logueado
+          />
+
           <h3 className="h3 text-dark mb-3">Comentarios ({publicacion.Comments ? publicacion.Comments.length : 0})</h3>
           {publicacion.Comments && publicacion.Comments.length > 0 ? (
             <div className="list-group">
               {comentarios.map(comentario => (
-                // Renderiza cada comentario. Se podría reemplazar por un componente <Comentario />
                 <div key={comentario.id} className="list-group-item list-group-item-action bg-light p-3 rounded-3 shadow-sm border border-light mb-3">
                   <div className="d-flex w-100 justify-content-between mb-2">
-                    <h5 className="h5 text-dark mb-0">@{comentario.userId}</h5>
+                    <h5 className="h5 text-dark mb-0 commentUser">@{comentario.User.nickName}</h5>
                   </div>
                   <p className="mb-0 text-dark">{comentario.comment}</p>
                 </div>
