@@ -61,7 +61,7 @@ function FormRegistro() {
           {error && <p className="alert alert-danger text-center">{error}</p>}
           {mensajeExito && <p className="alert alert-success text-center">{mensajeExito}</p>}
 
-          <button type="submit" className="btn btn-primary w-100 mt-3">Registrar</button>
+          <button type="submit" className="btn btn-success w-100 mt-3">Registrar</button>
         </form>
         <p className="text-center mt-3">
           ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a> {/* CHEQUEAR LINK A LA PAGE LOGIN */}

@@ -1,0 +1,26 @@
+.nav-link, .dropdown-item {
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover, 
+.dropdown-item:hover {
+    background-color: rgba(25, 135, 84, 0.1) !important;
+}
+
+.bi {
+    font-size: 1.1rem;
+    width: 1.2rem;
+    text-align: center;
+}
+
+.navbar-toggler {
+    display: block !important; 
+   
+}
+
+
+.navbar-toggler {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
