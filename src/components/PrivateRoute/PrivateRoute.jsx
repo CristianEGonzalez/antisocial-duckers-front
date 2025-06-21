@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function PrivateRoute({ children }) {
   const { usuario, cargando } = useAuth();
-  if (cargando) return null; // o un spinner
+  if (cargando) return null;
   return usuario ? children : <Navigate to="/login" />;
 }
 

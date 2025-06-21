@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
+
+.imgPublicacion{
+  object-fit: cover;
+  height: 200px;
+  border-radius: 1rem;
+  padding: 10px;
+}
+
+.publicacion-titulo{
+  font-size: 1.8rem;
+  font-family: 'Patrick Hand SC', sans-serif;
+}
+
+.publicacion-text{
+  font-size: 1.1rem;
+  font-family: 'Comic Neue', sans-serif;
+}
+
+.boton-verMas{
+  font-family: 'Comic Neue', sans-serif;
+  text-decoration: none;
+  color: #7072bd;
+  margin-left: 20px;
+  font-weight: 600;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.publicacion-coment{
+  font-size: 1rem;
+  font-family: 'Comic Neue', sans-serif;
+}

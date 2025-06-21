@@ -7,7 +7,7 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
-    const { logout } = useAuth();
+    const { usuario, logout } = useAuth();
 
     const cerrarSesion = () => {
         logout();
@@ -46,31 +46,42 @@ const Navbar = () => {
                     <NavLink to="/" className="nav-link-custom" onClick={handleNavLinkClick}>
                         <i className="bi bi-house"></i> Home
                     </NavLink>
-                    <NavLink to="/login" className="nav-link-custom" onClick={handleNavLinkClick}>
+                    {/* <NavLink to="/login" className="nav-link-custom" onClick={handleNavLinkClick}>
                         <i className="bi bi-box-arrow-in-right"></i> Login
-                    </NavLink>
+                    </NavLink> */}
 
                     {/* Dropdown Usuario */}
                     <div className={`dropdown-custom ${isUserDropdownOpen ? 'show' : ''}`}>
                         <span
-                            className="nav-link-custom dropdown-toggle-custom"
+                            className="nav-link-custom"
                             role="button"
                             onClick={toggleUserDropdown}
                         >
-                            <i className="bi bi-person-circle"></i> Usuario
+                            <i className="bi bi-person-circle"></i>Usuario
                         </span>
 
                         <div className="dropdown-menu-custom">
-                            <NavLink to="/perfil" className="dropdown-item-custom" onClick={handleNavLinkClick}>
-                                <i className="bi bi-person"></i> Perfil
-                            </NavLink>
-                            <NavLink to="/crearPublicacion" className="dropdown-item-custom" onClick={handleNavLinkClick}>
-                                <i className="bi bi-plus-square"></i> Crear Publicación
-                            </NavLink>
-                            <div className="dropdown-divider-custom"></div>
-                            <NavLink to="/crearPublicacion" className="dropdown-item-custom" onClick={() => { handleNavLinkClick(); cerrarSesion()}}>
-                                <i className="bi bi-box-arrow-right"></i> Logout
-                            </NavLink>
+                            {!usuario && (<>
+                                <NavLink to="/login" className="dropdown-item-custom" onClick={handleNavLinkClick}>
+                                    <i className="bi bi-plus-square"></i>Iniciar sesión
+                                </NavLink>
+                            </>)
+                            }
+
+                            {usuario && (<>
+                                <NavLink to="/perfil" className="dropdown-item-custom" onClick={handleNavLinkClick}>
+                                    <i className="bi bi-person"></i>Perfil
+                                </NavLink>
+                                <NavLink to="/crearPublicacion" className="dropdown-item-custom" onClick={handleNavLinkClick}>
+                                    <i className="bi bi-plus-square"></i>Crear Publicación
+                                </NavLink>
+                            
+                                <div className="dropdown-divider-custom"></div>
+                                <NavLink to="/" className="dropdown-item-custom" onClick={() => { handleNavLinkClick(); cerrarSesion()}}>
+                                    <i className="bi bi-box-arrow-right"></i>Logout
+                                </NavLink>
+                            </>)
+                            }
                         </div>
                     </div>
                 </nav>

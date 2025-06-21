@@ -46,18 +46,21 @@
     font-size: 16px;
     letter-spacing: 0.5px;
     padding: 8px 30px;
-    border-radius: 50px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border-radius: 5px;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
     white-space: nowrap;
     font-weight: 500;
-    text-transform: capitalize;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-family: 'Fira Sans', sans-serif;
-    font-style: italic;
-    background-color: #5a7d9a;
-    border: none;
+    font-family: 'Sour Gummy', sans-serif;
+    background-color: #7072bd;
+}
+
+.nav-link-custom:hover {
+    color: #333; 
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
 }
 
 /* Ocultar íconos en escritorio */
@@ -67,41 +70,10 @@
     display: none;
 }
 
-.nav-link-custom:hover {
-    color: #333; 
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-}
-
 /* Dropdown para Escritorio (Usuario) */
 .dropdown-custom {
     position: relative;
     display: inline-block;
-}
-
-.dropdown-toggle-custom {
-    cursor: pointer;
-    padding: 8px 30px;
-    border-radius: 50px; 
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    text-transform: capitalize;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Fira Sans', sans-serif;
-    font-style: italic;
-    background-color: #5a7d9a; 
-    border: none;
-}
-
-.dropdown-toggle-custom:hover {
-    color: #333;
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
 }
 
 .dropdown-menu-custom {
@@ -164,8 +136,6 @@
     .navbar-custom {
         justify-content: flex-end;
         padding: 15px 20px;
-        background-color: #f8f8f8;
-        border-bottom: 1px solid #eee;
     }
 
     .navbar-toggler-custom {
@@ -192,13 +162,14 @@
         width: 280px;
         height: 100%;
         background-color: #f8f8f8;
-        padding: 20px 20px 20px;
+        padding: 100px 20px 20px;
         transition: right 0.3s ease-in-out;
         z-index: 1020;
         overflow-y: auto;
         align-items: flex-start;
         gap: 10px;
         display: flex;
+        justify-content: flex-start;
     }
 
     .navbar-links-main.mobile-open {

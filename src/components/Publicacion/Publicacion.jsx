@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import './Publicacion.css'
+
 // Componente funcional de React para la tarjeta con carrusel
 export const Publicacion = ({
   idPublicacion,
@@ -31,7 +33,7 @@ export const Publicacion = ({
     >
       {/* Sección del nombre de usuario */}
       <div className="px-4 pt-4">
-        <p className="text-muted mb-2">
+        <p className="text-muted mb-2 publicacion-text">
           Publicado por:{" "}<span className="fw-medium text-dark">@{nickName}</span>
         </p>
       </div>
@@ -48,7 +50,7 @@ export const Publicacion = ({
               >
                 <img
                   src={image}
-                  className={`d-block w-100`}
+                  className={`d-block w-100 imgPublicacion`}
                   style={{ height: "200px", objectFit: "cover" }}
                 />
               </div>
@@ -90,35 +92,32 @@ export const Publicacion = ({
 
       {/* Cuerpo de la tarjeta */}
       <div className="card-body d-flex flex-column">
-        <h5 className="card-titulo">{titulo}</h5>
-        <p className="card-text">
+        <h5 className="publicacion-titulo">{titulo}</h5>
+        <p className="publicacion-text">
           {contenidoResumido}{hasImages && contenido.length > 50 && <span>...</span>}
         </p>
 
         {/* Contenedor para las etiquetas (etiquetas) */}
         {etiquetas.length > 0 && (
-            <div className="mt-3 mb-2 d-flex flex-wrap gap-2">
+            <div className="mt-1 mb-2 d-flex flex-wrap gap-2">
             {etiquetas.map((tag, index) => (
                 <span
                 key={index}
-                className="badge bg-secondary text-white rounded-pill px-2 py-1"
+                className="badge bg-light text-body-tertiary px-2 py-2"
                 >
-                {tag}
+                {`#${tag}`}
                 </span>
             ))}
             </div>
         )}
 
         {/* Contenedor para la cantidad de comentarios */}
-        <div className="text-muted mb-3 mt-auto">
+        <div className="text-muted mb-3 mt-auto publicacion-coment">
           Comentarios: <span className="fw-bold">{cantidadComentarios}</span>
         </div>
         <div className="d-grid gap-2 col-12 mx-auto">
-          {/* <a href={urlVerMas} className="btn btn-outline-success"> Antes estaba con una etiqueta a 
-            Ver Más
-          </a> */}
-          <Link to={urlVerMas} className="btn btn-outline-success">
-            Ver Más
+          <Link to={urlVerMas} className="boton-verMas">
+            Ver Más...
           </Link>
         </div>
       </div>
