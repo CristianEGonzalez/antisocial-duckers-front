@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import { Offcanvas, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './NavBar.css';
 
 const Navbar = () => {
-    const [show, setShow] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const { logout } = useAuth();
 
     const cerrarSesion = () => {
@@ -16,67 +14,70 @@ const Navbar = () => {
         navigate("/login");
     };
 
-    return (
-        <>
-            <button onClick={handleShow} className="navbar-toggler">
-                <span className="navbar-toggler-icon"></span>
-            </button>
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+        setIsUserDropdownOpen(false); // Cierra el dropdown de usuario para menú móvil
+    };
 
-            <Offcanvas show={show} onHide={handleClose} placement="end" className="bg-success-subtle">
-                <Offcanvas.Header closeButton className="border-bottom">
-                    <Offcanvas.Title className="fw-bold text-success">Menú</Offcanvas.Title>
-                </Offcanvas.Header>
-                
-                <Offcanvas.Body>
-                    <Nav className="flex-column gap-2">
-                        {/* Dropdown Usuario */}
-                        <div className="dropdown">
-                            <Nav.Link as="a" className="dropdown-toggle text-success-emphasis fw-medium d-flex align-items-center gap-2 rounded-3 px-3 py-2" role="button"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    const dropdown = e.target.closest('.dropdown');
-                                    dropdown.classList.toggle('show');
-                                    dropdown.querySelector('.dropdown-menu').classList.toggle('show');
-                                }}
-                            >
-                                <i className="bi bi-person-circle text-success"></i> Usuario
-                            </Nav.Link>
-                            
-                            <div className="dropdown-menu bg-success-subtle border-0 shadow-sm mt-1 ms-3">
-                                <Nav.Link as={NavLink} to="/perfil" onClick={handleClose} className="dropdown-item text-success-emphasis rounded-2 d-flex gap-2 align-items-center px-3 py-2">
-                                    <i className="bi bi-person"></i> Perfil
-                                </Nav.Link>
-                                
-                                <Nav.Link as={NavLink} to="/crearPublicacion" onClick={handleClose} className="dropdown-item text-success-emphasis rounded-2 d-flex gap-2 align-items-center px-3 py-2">
-                                    <i className="bi bi-plus-square"></i> Crear Publicación
-                                </Nav.Link>
-                                
-                                <div className="dropdown-divider my-2"></div>
-                                
-                                <Nav.Link as={NavLink} onClick={() => { handleClose(); cerrarSesion()}} className="dropdown-item text-success-emphasis rounded-2 d-flex gap-2 align-items-center px-3 py-2">
-                                    <i className="bi bi-box-arrow-right"></i> Logout
-                                </Nav.Link>
-                            </div>
+    const toggleUserDropdown = (e) => {
+        e.preventDefault();
+        setIsUserDropdownOpen(!isUserDropdownOpen);
+    };
+
+    const handleNavLinkClick = () => {
+        setIsMobileMenuOpen(false); // Cierra el menú móvil al hacer clic en un enlace
+        setIsUserDropdownOpen(false); // Cierra el dropdown al hacer clic en un enlace
+    };
+
+    return (
+        <header className="navbar-custom">
+            <div className="navbar-content-wrapper">
+                {/* Menú hamburguesa para móvil */}
+                <button
+                    onClick={toggleMobileMenu}
+                    className="navbar-toggler-custom"
+                    aria-label="Toggle navigation"
+                >
+                    <span className="navbar-toggler-icon-custom"></span> {/* Icono de hamburguesa */}
+                </button>
+
+                {/* Navegación principal - Se adapta para escritorio y móvil */}
+                <nav className={`navbar-links-main ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+                    <NavLink to="/" className="nav-link-custom" onClick={handleNavLinkClick}>
+                        <i className="bi bi-house"></i> Home
+                    </NavLink>
+                    <NavLink to="/login" className="nav-link-custom" onClick={handleNavLinkClick}>
+                        <i className="bi bi-box-arrow-in-right"></i> Login
+                    </NavLink>
+
+                    {/* Dropdown Usuario */}
+                    <div className={`dropdown-custom ${isUserDropdownOpen ? 'show' : ''}`}>
+                        <span
+                            className="nav-link-custom dropdown-toggle-custom"
+                            role="button"
+                            onClick={toggleUserDropdown}
+                        >
+                            <i className="bi bi-person-circle"></i> Usuario
+                        </span>
+
+                        <div className="dropdown-menu-custom">
+                            <NavLink to="/perfil" className="dropdown-item-custom" onClick={handleNavLinkClick}>
+                                <i className="bi bi-person"></i> Perfil
+                            </NavLink>
+                            <NavLink to="/crearPublicacion" className="dropdown-item-custom" onClick={handleNavLinkClick}>
+                                <i className="bi bi-plus-square"></i> Crear Publicación
+                            </NavLink>
+                            <div className="dropdown-divider-custom"></div>
+                            <NavLink to="/crearPublicacion" className="dropdown-item-custom" onClick={() => { handleNavLinkClick(); cerrarSesion()}}>
+                                <i className="bi bi-box-arrow-right"></i> Logout
+                            </NavLink>
                         </div>
-                        
-                        {/* Home */}
-                        <Nav.Link as={NavLink} to="/" onClick={handleClose} className="text-success-emphasis fw-medium d-flex align-items-center gap-2 rounded-3 px-3 py-2">
-                            <i className="bi bi-house"></i> Home
-                        </Nav.Link>
-                        
-                        {/* Login */}
-                        <Nav.Link as={NavLink} to="/login" onClick={handleClose} className="text-success-emphasis fw-medium d-flex align-items-center gap-2 rounded-3 px-3 py-2">
-                            <i className="bi bi-box-arrow-in-right"></i> Login
-                        </Nav.Link>
-                        
-                        {/* Registro */}
-                        <Nav.Link as={NavLink} to="/registro" onClick={handleClose} className="text-success-emphasis fw-medium d-flex align-items-center gap-2 rounded-3 px-3 py-2">
-                            <i className="bi bi-person-plus"></i> Registro
-                        </Nav.Link>
-                    </Nav>
-                </Offcanvas.Body>
-            </Offcanvas>
-        </>
+                    </div>
+                </nav>
+            </div>
+
+            {isMobileMenuOpen && <div className="mobile-overlay" onClick={toggleMobileMenu}></div>}
+        </header>
     );
 };
 
