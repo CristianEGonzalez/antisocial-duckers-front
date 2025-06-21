@@ -5,6 +5,7 @@ import Login from "../src/pages/Login"
 import Perfil from "../src/pages/Perfil"
 import DetallePublicacionId from "../src/pages/DetallePublicacionId"
 import Registro from "../src/pages/Registro"
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 
 const App = () => {
@@ -14,10 +15,20 @@ const App = () => {
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/login" element={ <Login /> } />
-        <Route path="/perfil" element={ <Perfil /> } />
         <Route path="/registro" element={ <Registro /> } />
         <Route path="/detallepublicacionid/:id" element={ <DetallePublicacionId /> } />
         <Route path="/*" element={ <Navigate to="/" /> } />
+
+        <Route
+          path="/perfil"
+          element={
+            <PrivateRoute>
+              <Perfil />
+            </PrivateRoute>
+          }
+        />
+
+
       </Routes>
     </>
   );

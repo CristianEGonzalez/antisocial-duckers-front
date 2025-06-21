@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { obtenerUsuarios, crearUsuario } from '../../services/userApi';
+import { useNavigate, Link } from 'react-router-dom';
 
 function FormRegistro() {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [mensajeExito, setMensajeExito] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,13 +32,13 @@ function FormRegistro() {
       const usuarioRegistrado = await crearUsuario(nuevoUsuario);
 
       setMensajeExito(`¡Registro exitoso ${usuarioRegistrado.nickName}! Ahora puedes iniciar sesión.`);
-      
-      // Opcional: Loguear al usuario directamente después del registro
-      // iniciarSesion(usuarioRegistrado); 
 
       // Limpiar el formulario
       setNickname('');
       setEmail('');
+      setError('');
+
+      setTimeout(navigate, 2500, '/login');
 
     } catch (err) {
       console.error("Error en el registro:", err.message);
@@ -64,7 +66,7 @@ function FormRegistro() {
           <button type="submit" className="btn btn-success w-100 mt-3">Registrar</button>
         </form>
         <p className="text-center mt-3">
-          ¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a> {/* CHEQUEAR LINK A LA PAGE LOGIN */}
+          ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
         </p>
       </div>
     </div>

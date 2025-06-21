@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Offcanvas, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './NavBar.css';
 
 const Navbar = () => {
@@ -8,6 +9,12 @@ const Navbar = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const { logout } = useAuth();
+
+    const cerrarSesion = () => {
+        logout();
+        navigate("/login");
+    };
 
     return (
         <>
@@ -46,7 +53,7 @@ const Navbar = () => {
                                 
                                 <div className="dropdown-divider my-2"></div>
                                 
-                                <Nav.Link as={NavLink} to="/" onClick={handleClose} className="dropdown-item text-success-emphasis rounded-2 d-flex gap-2 align-items-center px-3 py-2">
+                                <Nav.Link as={NavLink} onClick={() => { handleClose(); cerrarSesion()}} className="dropdown-item text-success-emphasis rounded-2 d-flex gap-2 align-items-center px-3 py-2">
                                     <i className="bi bi-box-arrow-right"></i> Logout
                                 </Nav.Link>
                             </div>
