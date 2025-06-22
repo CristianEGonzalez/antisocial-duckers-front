@@ -1,22 +1,22 @@
- //Hacer que el userId que comenta sea el del usuario logueado!!!!!!!!!!!!!!!!!!
- //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; //para obtener el ID de la URL
 import { obtenerPublicacionPorId } from '../../services/postApi';
 import { obtenerUsuarioPorId } from '../../services/userApi'
 import { obtenerComentariosDeUnaPublicacion } from '../../services/commentApi'
 import EscribirComentario from '../EscribirComentario/EscribirComentario'
+import { useAuth } from '../../context/AuthContext';
 import './DetallePublicacion.css';
 
 export const DetallePublicacion = () => {
   //'id' de los parámetros de la url
   const { id } = useParams(); 
   const [publicacion, setPublicacion] = useState(null);
-  const [usuario, setUsuario] = useState(null)
+  const [user, setUser] = useState(null)
   const [comentarios, setComentarios] = useState(null)
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+
+  const { usuario, usuarioId } = useAuth();
 
   useEffect(() => {
     const fetchPublicacion = async () => {
@@ -26,7 +26,7 @@ export const DetallePublicacion = () => {
         const unUsuario = await obtenerUsuarioPorId(unaPublicacion.userId);
         const listaDeComentarios = await obtenerComentariosDeUnaPublicacion(unaPublicacion.id)
         setPublicacion(unaPublicacion);
-        setUsuario(unUsuario);
+        setUser(unUsuario);
         setComentarios(listaDeComentarios)
 
       } catch (err) {
@@ -55,7 +55,6 @@ export const DetallePublicacion = () => {
   // Verifica si la publicación tiene imágenes para mostrar el carrusel.
   const tieneImagenes = publicacion.Post_Images && publicacion.Post_Images.length > 0;
 
-
   const handleComentarioCreado = (nuevoComentario) => {
         setComentarios(prevComentarios => [nuevoComentario, ...prevComentarios]); // Agrega al principio
   };
@@ -68,7 +67,7 @@ export const DetallePublicacion = () => {
         <div className="p-4 border-bottom border-light">
           <p className="text-muted mb-0">
             Publicado por:{" "}
-            <span className="fw-medium text-dark">@{usuario.nickName}</span>
+            <span className="fw-medium text-dark">@{user.nickName}</span>
           </p>
         </div>
 
@@ -159,14 +158,16 @@ export const DetallePublicacion = () => {
           <hr className="my-4" />
           
           {/*Comentarios */}
-          <EscribirComentario
-                        postId={publicacion.id}
-                        onComentarioCreado={handleComentarioCreado}
-                        userId={usuario.id} //Hacer que este userId sea el del usuario logueado
-          />
+          {usuario && (
+            <EscribirComentario
+                          postId={publicacion.id}
+                          onComentarioCreado={handleComentarioCreado}
+                          userId={usuarioId}
+            />
+          )}
 
-          <h3 className="h3 text-dark mb-3">Comentarios ({publicacion.Comments ? publicacion.Comments.length : 0})</h3>
-          {publicacion.Comments && publicacion.Comments.length > 0 ? (
+          <h3 className="h3 text-dark mb-3">Comentarios ({comentarios ? comentarios.length : 0})</h3>
+          {comentarios && comentarios.length > 0 ? (
             <div className="list-group">
               {comentarios.map(comentario => (
                 <div key={comentario.id} className="list-group-item list-group-item-action bg-light p-3 rounded-3 shadow-sm border border-light mb-3">
@@ -178,9 +179,9 @@ export const DetallePublicacion = () => {
               ))}
             </div>
           ) : (
-            // Mensaje si no hay comentarios
             <p className="text-muted">No hay comentarios aún. ¡Sé el primero en comentar!</p>
           )}
+
         </div>
       </div>
     </div>

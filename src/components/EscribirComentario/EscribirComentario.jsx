@@ -6,14 +6,12 @@ const EscribirComentario = ({ postId, onComentarioCreado, userId }) => {
     const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
 
         setError(null);
 
         try {
             const nuevoComentario = { postId: postId, comment: comentarioTexto, userId: userId };
-            console.log(nuevoComentario)
-
             const comentarioCreado = await crearComentario(nuevoComentario);
 
             setComentarioTexto('')
@@ -29,6 +27,14 @@ const EscribirComentario = ({ postId, onComentarioCreado, userId }) => {
         }
     };
 
+    // Función para que reconozca la tecla Enter y haga submit del comentario
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Evita salto de línea
+            handleSubmit();
+        }
+    };
+
     return (
         <div className="card bg-white p-4 rounded-3 shadow-sm border border-light mb-4">
             <h4 className="mb-3 text-dark">Agregar un comentario</h4>
@@ -41,14 +47,11 @@ const EscribirComentario = ({ postId, onComentarioCreado, userId }) => {
                         placeholder="Escribe tu comentario aquí..."
                         value={comentarioTexto}
                         onChange={(e) => setComentarioTexto(e.target.value)}
+                        onKeyDown={handleKeyDown} //submit con Enter
                     ></textarea>
                 </div>
                 {error && <div className="alert alert-danger" role="alert">{error}</div>}
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                >Comentar
-                </button>
+                <button type="submit" className="btn btn-primary">Comentar</button>
             </form>
         </div>
     );

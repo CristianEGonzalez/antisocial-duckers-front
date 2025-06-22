@@ -1,39 +1,54 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { obtenerUsuarios } from '../services/userApi';
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
+  const [usuarioId, setUsuarioId] = useState(null);
   const [cargando, setCargando] = useState(true);
 
-    useEffect(() => {
+  useEffect(() => {
     const nickGuardado = localStorage.getItem('usuario');
-    if (nickGuardado) {
-        setUsuario({ nickName: nickGuardado });
-    }
-    setCargando(false); 
-    }, []);
+    const idGuardado = localStorage.getItem('usuarioId');
 
-  // Guarda en localStorage al loguear
-  const login = (nickName) => {
-    setUsuario({ nickName });
-    localStorage.setItem('usuario', nickName);
+    if (nickGuardado) {
+      setUsuario({ nickName: nickGuardado });
+      if (idGuardado) setUsuarioId(parseInt(idGuardado));
+    }
+
+    setCargando(false); 
+  }, []);
+
+  const login = async (nickName) => {
+    const usuarios = await obtenerUsuarios();
+    const user = usuarios.find(u => u.nickName === nickName);
+
+    if (user) {
+      setUsuario({ nickName: user.nickName });
+      setUsuarioId(user.id);
+
+      localStorage.setItem('usuario', user.nickName);
+      localStorage.setItem('usuarioId', user.id.toString());
+    } else {
+      console.warn('Usuario no encontrado');
+    }
   };
 
-  // Eliminar del localStorage al cerrar sesión
   const logout = () => {
     setUsuario(null);
+    setUsuarioId(null);
     localStorage.removeItem('usuario');
+    localStorage.removeItem('usuarioId');
   };
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout, cargando }}>
+    <AuthContext.Provider value={{ usuario, usuarioId, login, logout, cargando }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Evitá exportar directamente una función anónima como export default
 export function useAuth() {
   return useContext(AuthContext);
 }
