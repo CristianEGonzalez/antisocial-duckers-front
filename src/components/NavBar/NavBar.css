@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Open+Sans:wght@600;700&family=Fira+Sans:ital,wght@1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
 
 /* General Navbar Styles */
 .navbar-custom {
@@ -43,7 +43,7 @@
 .nav-link-custom {
     color: #ffffff;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1.2rem;
     letter-spacing: 0.5px;
     padding: 8px 30px;
     border-radius: 5px;
@@ -53,7 +53,8 @@
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    font-family: 'Sour Gummy', sans-serif;
+    font-family: 'Patrick Hand SC', sans-serif;
+    font-weight: bold;
     background-color: #7072bd;
 }
 

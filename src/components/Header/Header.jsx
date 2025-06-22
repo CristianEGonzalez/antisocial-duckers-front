@@ -1,4 +1,3 @@
-import { Menu } from "../Menu/Menu";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
@@ -11,7 +10,6 @@ export const Header= () => {
           <img src={logo} alt="Logo" width="120" className="me-2" />
         </NavLink>
         <NavBar/>
-        {/* <Menu /> */}
       </div>
     </header>
   );
