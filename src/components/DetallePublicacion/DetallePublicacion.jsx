@@ -1,34 +1,31 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; //para obtener el ID de la URL
+import { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { obtenerPublicacionPorId } from '../../services/postApi';
-import { obtenerUsuarioPorId } from '../../services/userApi'
-import { obtenerComentariosDeUnaPublicacion } from '../../services/commentApi'
-import EscribirComentario from '../EscribirComentario/EscribirComentario'
+import { obtenerUsuarioPorId } from '../../services/userApi';
+import { obtenerComentariosDeUnaPublicacion } from '../../services/commentApi';
+import EscribirComentario from '../EscribirComentario/EscribirComentario';
 import { useAuth } from '../../context/AuthContext';
 import './DetallePublicacion.css';
 
-export const DetallePublicacion = () => {
-  //'id' de los parámetros de la url
-  const { id } = useParams(); 
+const DetallePublicacion = () => {
+  const { id } = useParams();
   const [publicacion, setPublicacion] = useState(null);
-  const [user, setUser] = useState(null)
-  const [comentarios, setComentarios] = useState(null)
+  const [user, setUser] = useState(null);
+  const [comentarios, setComentarios] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
-
   const { usuario, usuarioId } = useAuth();
 
   useEffect(() => {
     const fetchPublicacion = async () => {
       try {
-        setCargando(true); 
-        const unaPublicacion = await obtenerPublicacionPorId(id); 
+        setCargando(true);
+        const unaPublicacion = await obtenerPublicacionPorId(id);
         const unUsuario = await obtenerUsuarioPorId(unaPublicacion.userId);
-        const listaDeComentarios = await obtenerComentariosDeUnaPublicacion(unaPublicacion.id)
+        const listaDeComentarios = await obtenerComentariosDeUnaPublicacion(unaPublicacion.id);
         setPublicacion(unaPublicacion);
         setUser(unUsuario);
-        setComentarios(listaDeComentarios)
-
+        setComentarios(listaDeComentarios);
       } catch (err) {
         setError("Error al cargar la publicación: " + (err.message || 'Por favor, intenta de nuevo más tarde.'));
       } finally {
@@ -36,9 +33,14 @@ export const DetallePublicacion = () => {
       }
     };
 
-    fetchPublicacion(); 
-  }, [id]); // se vuelve a ejecutar si cambia el id
+    fetchPublicacion();
+  }, [id]);
 
+  const handleComentarioCreado = (nuevoComentario) => {
+    setComentarios(prev => [nuevoComentario, ...prev]);
+  };
+
+  const tieneImagenes = publicacion?.Post_Images?.length > 0;
 
   if (cargando) {
     return <div className="text-center my-4 fs-5">Cargando publicación...</div>;
@@ -52,140 +54,84 @@ export const DetallePublicacion = () => {
     );
   }
 
-  // Verifica si la publicación tiene imágenes para mostrar el carrusel.
-  const tieneImagenes = publicacion.Post_Images && publicacion.Post_Images.length > 0;
-
-  const handleComentarioCreado = (nuevoComentario) => {
-        setComentarios(prevComentarios => [nuevoComentario, ...prevComentarios]); // Agrega al principio
-  };
-
-
-
   return (
-    <div className="bg-light d-flex flex-column align-items-center py-4 px-3" style={{ minHeight: '100vh' }}>
-      <div className="bg-white rounded-3 shadow-lg overflow-hidden w-100" style={{ maxWidth: '960px' }}>
-        <div className="p-4 border-bottom border-light">
-          <p className="text-muted mb-0">
-            Publicado por:{" "}
-            <span className="fw-medium text-dark">@{user.nickName}</span>
-          </p>
-        </div>
-
-        {/* Carrusel de imágenes, solo se renderiza si hay imágenes disponibles */}
-        {tieneImagenes && (
-          <div id={`carousel-${publicacion.id}`} className="carousel slide w-100" data-bs-ride="carousel">
-            <div className="carousel-inner rounded-md">
-              {publicacion.Post_Images.map((image, index) => (
-                <div 
-                  className={`carousel-item ${index === 0 ? "active" : ""}`}
-                  data-bs-interval="3000" 
-                  key={index}
-                >
-                  <img
-                    src={image.url}
-                    className="d-block w-100 object-cover"
-                    
-                    alt={`Imagen ${index + 1} de la publicación`}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Las lineas */}
-            {publicacion.Post_Images.length > 1 && (
-              <div className="carousel-indicators">
-                {publicacion.Post_Images.map((_, index) => (
-                  <button
+    <div className="container-fluid">
+      <div className="row vh-100">
+        {/* Carrusel fijo a la izquierda */}
+        
+        <div className="col-md-8 col-12 position-md-sticky start-0 top-0 h-md-100 p-3 bg-white overflow-hidden mb-4 mb-md-0"
+        style={{ height: '100vh', position: 'sticky', top: '60px' }}>
+          {tieneImagenes && (
+            <div id={`carousel-${publicacion.id}`} className="carousel slide h-100" data-bs-ride="carousel">
+              <div className="carousel-inner h-100 rounded">
+                {publicacion.Post_Images.map((image, index) => (
+                  <div
+                    className={`carousel-item h-100 ${index === 0 ? 'active' : ''}`}
+                    data-bs-interval="3000"
                     key={index}
-                    type="button"
-                    data-bs-target={`#carousel-${publicacion.id}`}
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
+                  >
+                    <img
+                      src={image.url}
+                      className="d-block mx-auto carousel-image rounded"
+                      alt={`Imagen ${index + 1}`}
+                    />
+
+                  </div>
                 ))}
               </div>
-            )}
 
-            {/* Controles de navegación del carrusel (anterior/siguiente) */}
-            {publicacion.Post_Images.length > 1 && (
-              <>
-                <button 
-                  className="carousel-control-prev" 
-                  type="button" 
-                  data-bs-target={`#carousel-${publicacion.id}`} 
-                  data-bs-slide="prev"
-                >
-                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Anterior</span>
-                </button>
-                <button 
-                  className="carousel-control-next" 
-                  type="button" 
-                  data-bs-target={`#carousel-${publicacion.id}`} 
-                  data-bs-slide="next" 
-                >
-                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Siguiente</span>
-                </button>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* Cuerpo principal de la publicación (título, contenido, etiquetas) */}
-        <div className="p-4">
-          <h1 className="h1 text-dark mb-3">{publicacion.title || `Publicación #${publicacion.id}`}</h1>
-          <p className="lead text-dark mb-4">
-            {publicacion.content} 
-          </p>
-
-          {/* tags */}
-          {publicacion.Tags && publicacion.Tags.length > 0 && (
-            <div className="mt-4 mb-4 d-flex flex-wrap gap-2">
-              {publicacion.Tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="badge bg-info text-dark rounded-pill px-3 py-2" 
-                >
-                  {tag.tag}
-                </span>
-              ))}
+              {publicacion.Post_Images.length > 1 && (
+                <>
+                  <button className="carousel-control-prev" type="button" data-bs-target={`#carousel-${publicacion.id}`} data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon"></span>
+                    <span className="visually-hidden">Anterior</span>
+                  </button>
+                  <button className="carousel-control-next" type="button" data-bs-target={`#carousel-${publicacion.id}`} data-bs-slide="next">
+                    <span className="carousel-control-next-icon"></span>
+                    <span className="visually-hidden">Siguiente</span>
+                  </button>
+                </>
+              )}
             </div>
           )}
+        </div>
 
-          <hr className="my-4" />
-          
-          {/*Comentarios */}
+        {/* Columna derecha con scroll */}
+        <div className="col-md-4 col-12 border-start border-md-start-0 bg-light p-3 overflow-y-auto scroll-columna-derecha">
+          <h2 className="h4">{publicacion.title}</h2>
+          <p className="text-muted">{publicacion.description}</p>
+
           {usuario && (
             <EscribirComentario
-                          postId={publicacion.id}
-                          onComentarioCreado={handleComentarioCreado}
-                          userId={usuarioId}
+              postId={publicacion.id}
+              onComentarioCreado={handleComentarioCreado}
+              userId={usuarioId}
             />
           )}
 
-          <h3 className="h3 text-dark mb-3">Comentarios ({comentarios ? comentarios.length : 0})</h3>
+          <h5 className="mt-4">Comentarios ({comentarios?.length || 0})</h5>
+
           {comentarios && comentarios.length > 0 ? (
             <div className="list-group">
-              {comentarios.map(comentario => (
-                <div key={comentario.id} className="list-group-item list-group-item-action bg-light p-3 rounded-3 shadow-sm border border-light mb-3">
-                  <div className="d-flex w-100 justify-content-between mb-2">
-                    <h5 className="h5 text-dark mb-0 commentUser">@{comentario.User.nickName}</h5>
+              {comentarios.map((comentario) => (
+                <div
+                  key={comentario.id}
+                  className="list-group-item list-group-item-action bg-white p-3 rounded-3 shadow-sm border-light mb-3"
+                >
+                  <div className="d-flex justify-content-between mb-2">
+                    <h6 className="mb-0">@{comentario.User.nickName}</h6>
                   </div>
-                  <p className="mb-0 text-dark">{comentario.comment}</p>
+                  <p className="mb-0">{comentario.comment}</p>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-muted">No hay comentarios aún. ¡Sé el primero en comentar!</p>
+            <p className="text-muted">No hay comentarios aún.</p>
           )}
-
         </div>
       </div>
     </div>
   );
 };
 
-export default DetallePublicacion;
+export default DetallePublicacion

@@ -1,3 +1,43 @@
 .commentUser{
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+/* Altura de scroll de la columna de la derecha */
+.scroll-columna-derecha {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.carousel-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.carousel-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+/* Scroll vertical solo en desktop */
+@media (min-width: 768px) {
+  .scroll-columna-derecha {
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
