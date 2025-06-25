@@ -98,8 +98,11 @@ const DetallePublicacion = () => {
 
         {/* Columna derecha con scroll */}
         <div className="col-md-4 col-12 border-start border-md-start-0 bg-light p-3 overflow-y-auto scroll-columna-derecha">
+          <p className="text-muted mb-2 publicacion-text">
+            Publicado por:{" "}<span className="fw-medium text-dark">@{user.nickName}</span>
+          </p>
           <h2 className="h4">{publicacion.title}</h2>
-          <p className="text-muted">{publicacion.description}</p>
+          <p className="text-muted">{publicacion.content}</p>
 
           {usuario && (
             <EscribirComentario
