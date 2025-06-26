@@ -10,9 +10,9 @@ export const obtenerPublicacionPorId = async (id) => {
 };
 
 // no se como usar este, consultar con el profesor
-export const obtenerPublicacionesPorUserId = async (userId) => {
-  return apiFetch(`posts?userId=${userId}`);
-};
+// export const obtenerPublicacionesPorUserId = async (userId) => {
+//   return apiFetch(`posts?userId=${userId}`);
+// };
 
 export const crearPublicacion = async (postData) => {
   return apiFetch('posts', 'POST', postData);

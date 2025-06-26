@@ -47,9 +47,6 @@ const Navbar = () => {
                     <NavLink to="/" className="nav-link-custom" onClick={handleNavLinkClick}>
                         <i className="bi bi-house"></i> Home
                     </NavLink>
-                    {/* <NavLink to="/login" className="nav-link-custom" onClick={handleNavLinkClick}>
-                        <i className="bi bi-box-arrow-in-right"></i> Login
-                    </NavLink> */}
 
                     {/* Dropdown Usuario */}
                     <div className={`dropdown-custom ${isUserDropdownOpen ? 'show' : ''}`}>
