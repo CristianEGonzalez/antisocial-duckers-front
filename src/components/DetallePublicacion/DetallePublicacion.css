@@ -9,8 +9,19 @@
   scroll-behavior: smooth;
 }
 
+.scroll-columna-derecha-sin-imagenes{
+  /* ACA CENTRAR VERTICALMENTE */
+}
+
 .carousel-container{
   height: calc(100vh - 300px);
+}
+
+.carousel-container-sin-imagenes{
+  height: 0px;
+  width: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .carousel-item {
@@ -37,4 +48,5 @@
 .carousel-container{
   height: calc(100vh - 100px);
 }
+
 }
