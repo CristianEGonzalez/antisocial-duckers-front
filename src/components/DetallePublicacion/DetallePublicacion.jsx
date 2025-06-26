@@ -89,7 +89,7 @@ const DetallePublicacion = () => {
               className="carousel slide h-100"
               data-bs-ride="carousel"
             >
-              <div className="carousel-inner h-100 rounded">
+              <div className="carousel-inner h-100">
                 {publicacion.Post_Images.map((image, index) => (
                   <div
                     className={`carousel-item h-100 ${
@@ -100,7 +100,7 @@ const DetallePublicacion = () => {
                   >
                     <img
                       src={image.url}
-                      className="carousel-image rounded"
+                      className="carousel-image"
                       alt={`Imagen ${index + 1}`}
                     />
                   </div>
