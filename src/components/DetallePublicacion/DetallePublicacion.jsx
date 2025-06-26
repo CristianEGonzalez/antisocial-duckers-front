@@ -58,7 +58,7 @@ const DetallePublicacion = () => {
     <div className="container-fluid">
       <div className="row">
         {/* Carrusel fijo a la izquierda */}
-        <div className="col-md-8 col-12 bg-body-secondary carousel-container"> {/*Cambiar Clase cuando no tiene imagenes*/}
+        <div className={`col-md-8 col-12 bg-body-secondary ${tieneImagenes ? 'carousel-container' : ''}`}>
           {tieneImagenes && (
             <div id={`carousel-${publicacion.id}`} className="carousel slide h-100" data-bs-ride="carousel">
               <div className="carousel-inner h-100 rounded">
@@ -95,7 +95,7 @@ const DetallePublicacion = () => {
         </div>
 
         {/* Columna derecha con scroll */}
-        <div className="col-md-4 col-12 border-start border-md-start-0 bg-light p-3 overflow-y-auto scroll-columna-derecha-sin-imagenes">{/*Cambiar Clase cuando no tiene imagenes*/}
+        <div className={`col-md-4 col-12 bg-light p-3 overflow-y-auto ${tieneImagenes ? 'scroll-columna-derecha' : 'scroll-columna-derecha-sin-imagenes mx-auto col-md-8'}`}>
           <p className="text-muted mb-2 publicacion-text">
             Publicado por:{" "}<span className="fw-medium text-dark">@{user.nickName}</span>
           </p>
