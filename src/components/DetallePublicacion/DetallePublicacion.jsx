@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { obtenerPublicacionPorId } from "../../services/postApi";
+import { obtenerPublicacionPorId, obtenerTagsDeUnPost } from "../../services/postApi";
 import { obtenerUsuarioPorId } from "../../services/userApi";
 import {
   obtenerComentariosDeUnaPublicacion,
@@ -16,6 +16,7 @@ const DetallePublicacion = () => {
   const [user, setUser] = useState(null);
   const [comentarios, setComentarios] = useState(null);
   const [comentarioAEliminar, setComentarioAEliminar] = useState(null);
+  const [etiquetas, setEtiquetas] = useState([])
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const { usuario, usuarioId } = useAuth();
@@ -26,12 +27,12 @@ const DetallePublicacion = () => {
         setCargando(true);
         const unaPublicacion = await obtenerPublicacionPorId(id);
         const unUsuario = await obtenerUsuarioPorId(unaPublicacion.userId);
-        const listaDeComentarios = await obtenerComentariosDeUnaPublicacion(
-          unaPublicacion.id
-        );
+        const listaDeComentarios = await obtenerComentariosDeUnaPublicacion(id);
+        const listaDeEtiquetas = await obtenerTagsDeUnPost(id)
         setPublicacion(unaPublicacion);
         setUser(unUsuario);
         setComentarios(listaDeComentarios);
+        setEtiquetas(listaDeEtiquetas);
       } catch (err) {
         setError(
           "Error al cargar la publicación: " +
@@ -147,6 +148,21 @@ const DetallePublicacion = () => {
           </p>
           <h2 className="h4">{publicacion.title}</h2>
           <p className="text-muted">{publicacion.content}</p>
+
+          {/* Contenedor para las etiquetas (etiquetas) */}
+          {etiquetas.length > 0 && (
+              <div className="mt-1 mb-2 d-flex flex-wrap gap-2">
+              {etiquetas.map((etiqueta, index) => (
+                  <span
+                  key={index}
+                  className="badge bg-success-subtle text-dark px-2 py-2"
+                  >
+                  {`#${etiqueta.tag}`}
+                  </span>
+              ))}
+              </div>
+          )}
+
 
           {usuario && (
             <EscribirComentario
