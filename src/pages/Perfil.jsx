@@ -1,8 +1,10 @@
-
+import TuPerfil from '../components/Perfil/Perfil'
 
 function Perfil() {
   return (
-    <div>Perfil</div>
+    <div className="container mt-4">
+        <TuPerfil/>
+    </div>    
   )
 }
 
