@@ -6,6 +6,7 @@ import Perfil from "../src/pages/Perfil"
 import DetallePublicacionId from "../src/pages/DetallePublicacionId"
 import Registro from "../src/pages/Registro"
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Publicaciones from "../src/pages/Publicaciones";
 
 
 const App = () => {
@@ -17,8 +18,8 @@ const App = () => {
         <Route path="/login" element={ <Login /> } />
         <Route path="/registro" element={ <Registro /> } />
         <Route path="/detallepublicacionid/:id" element={ <DetallePublicacionId /> } />
+        <Route path="/publicaciones" element={<Publicaciones />} />
         <Route path="/*" element={ <Navigate to="/" /> } />
-
         <Route
           path="/perfil"
           element={
