@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { obtenerPublicacionPorId } from "../../services/postApi";
 import { obtenerUsuarioPorId } from "../../services/userApi";
@@ -168,7 +168,7 @@ const DetallePublicacion = () => {
                   <div className="d-flex justify-content-between mb-2">
                     <h6 className="mb-0">@{comentario.User.nickName}</h6>
 
-                    {usuario.nickName === comentario.User.nickName && (
+                    {usuario && usuario.nickName === comentario.User.nickName && (
                       <button
                         onClick={() => setComentarioAEliminar(comentario.id)}
                         className="btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-2"
