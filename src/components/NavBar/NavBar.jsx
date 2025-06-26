@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-
+    
     const { usuario, logout } = useAuth();
+    const navigate = useNavigate();
 
     const cerrarSesion = () => {
         logout();
-        navigate("/login");
+        navigate("/login"); //SOLO VUELVE AL LOGIN CUANDO EL USUARIO HACE LOGOUT DESDE SU PERFIL
     };
 
     const toggleMobileMenu = () => {
