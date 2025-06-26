@@ -79,7 +79,7 @@ const DetallePublicacion = () => {
       <div className="row">
         {/* Carrusel fijo a la izquierda */}
         <div
-          className={`col-md-8 col-12 bg-body-secondary ${
+          className={`col-md-8 col-12 p-3 bg-body-secondary ${
             tieneImagenes ? "carousel-container" : ""
           }`}
         >
