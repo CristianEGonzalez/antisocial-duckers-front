@@ -57,7 +57,7 @@ function PublicacionesRecientes() {
   }
 
   return (
-    <section className="bg-light p-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "space-around"}}>
+    <section className="p-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "space-around"}}>
       {posts.map(post => (
         <Publicacion
           key={post.id}

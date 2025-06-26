@@ -10,8 +10,9 @@
 }
 
 .carousel-container{
-  height: 88vh;
+  height: calc(100vh - 300px);
 }
+
 .carousel-item {
   height: 100%;
   display: flex;
@@ -28,12 +29,12 @@
 
 /* Scroll vertical solo en desktop */
 @media (min-width: 768px) {
-.carousel-inner {
-  height: 200px;
-}
-
 .scroll-columna-derecha {
-    height: 88vh;
+    height: calc(100vh - 100px);
     overflow-y: auto;
   }
+
+.carousel-container{
+  height: calc(100vh - 100px);
+}
 }
