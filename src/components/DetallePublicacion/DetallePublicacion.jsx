@@ -56,11 +56,9 @@ const DetallePublicacion = () => {
 
   return (
     <div className="container-fluid">
-      <div className="row vh-100">
+      <div className="row">
         {/* Carrusel fijo a la izquierda */}
-        
-        <div className="col-md-8 col-12 position-md-sticky start-0 top-0 h-md-100 p-3 bg-white overflow-hidden mb-4 mb-md-0"
-        style={{ height: '100vh', position: 'sticky', top: '60px' }}>
+        <div className="col-md-8 col-12 p-3 bg-body-secondary carousel-container">
           {tieneImagenes && (
             <div id={`carousel-${publicacion.id}`} className="carousel slide h-100" data-bs-ride="carousel">
               <div className="carousel-inner h-100 rounded">
@@ -72,7 +70,7 @@ const DetallePublicacion = () => {
                   >
                     <img
                       src={image.url}
-                      className="d-block mx-auto carousel-image rounded"
+                      className="carousel-image rounded"
                       alt={`Imagen ${index + 1}`}
                     />
 
