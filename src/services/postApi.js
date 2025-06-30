@@ -28,7 +28,7 @@ export const eliminarPublicacion = async (id) => {
 
 // hacerlo por parametro, no por body
 export const asociarTagAPost = async (postId, tagId) => {
-  return apiFetch(`posts/${postId}/tags`, 'POST', { tagId });
+  return apiFetch(`posts/${postId}/tags/${tagId}`, 'POST');
 };
 
 // hacerlo por parametro, no por body
