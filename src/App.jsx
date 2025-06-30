@@ -7,8 +7,7 @@ import DetallePublicacionId from "../src/pages/DetallePublicacionId"
 import Registro from "../src/pages/Registro"
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Publicaciones from "../src/pages/Publicaciones";
-import CrearPublicacionForm from "./pages/CrearPublicacionForm";
-
+import CrearPublicacion from "../src/components/CrearPublicacion/CrearPublicacion";
 
 const App = () => {
   return (
@@ -33,7 +32,7 @@ const App = () => {
           path="/crearPublicacion"
           element={
             <PrivateRoute>
-              <CrearPublicacionForm/>
+              <CrearPublicacion/>
             </PrivateRoute>
           }
         />
