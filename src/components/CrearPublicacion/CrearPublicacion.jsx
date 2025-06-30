@@ -125,7 +125,6 @@ function CrearPublicacion () {
       }
 
       setMensajeExito("¡Publicación creada y elementos asociados con éxito!")
-      console.log("Publicación creada y elementos asociados:", nuevaPublicacion)
 
       setTitulo('')
       setContenido('')
@@ -133,7 +132,7 @@ function CrearPublicacion () {
       setUrlsImagenes([])
       setNuevaUrlImagen('')
 
-      navigate(`/perfil`);
+      setTimeout(navigate, 2500, '/perfil')
     } catch (err) {
       setError("Error al crear la publicación: " + (err.message || "Algo salió mal."));
       console.error("Error al crear publicación:", err);
