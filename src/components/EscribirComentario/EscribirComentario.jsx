@@ -51,7 +51,7 @@ const EscribirComentario = ({ postId, onComentarioCreado, userId }) => {
                     ></textarea>
                 </div>
                 {error && <div className="alert alert-danger" role="alert">{error}</div>}
-                <button type="submit" className="btn btn-primary">Comentar</button>
+                <button type="submit" className="btn btn-success">Comentar</button>
             </form>
         </div>
     );
