@@ -28,7 +28,7 @@ function PublicacionesRecientes() {
         const publicaciones = await obtenerPublicaciones();
         
         // --- Definimos cuántas publicaciones recientes se mostrarán en el home ---
-        const publicacionesRecientes = obtenerPublicacionesRecientes(publicaciones, 8);
+        const publicacionesRecientes = obtenerPublicacionesRecientes(publicaciones, 6);
         setPosts(publicacionesRecientes);
         // ---------------------------------
 

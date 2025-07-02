@@ -1,15 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
 
+.cardformat{
+  width: 22rem;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  margin: 15px 25px !important;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.card:hover{
+  transform: translateY(-3px);
+}
+
 .imgPublicacion{
   object-fit: cover;
   height: 200px;
-  border-radius: 1rem;
-  padding: 10px;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .publicacion-titulo{
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-family: 'Patrick Hand SC', sans-serif;
 }
 

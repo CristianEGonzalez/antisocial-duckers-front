@@ -20,23 +20,7 @@ export const Publicacion = ({
   
   return (
     // Contenedor principal de la tarjeta con estilos de Bootstrap
-    <div
-      className="card"
-      style={{
-        width: "18rem",
-        borderRadius: "1rem",
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        margin: "10px",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {/* Sección del nombre de usuario */}
-      <div className="px-4 pt-4">
-        <p className="text-muted mb-2 publicacion-text">
-          Publicado por:{" "}<span className="fw-medium text-dark">@{nickName}</span>
-        </p>
-      </div>
+    <div className="card cardformat">
 
       {/* Carrusel de imágenes (solo si hay imágenes) */}
       {hasImages && (
@@ -90,6 +74,13 @@ export const Publicacion = ({
         </div>
       )}
 
+      {/* Sección del nombre de usuario */}
+      <div className="px-4 pt-2">
+        <p className="text-muted mb-0 publicacion-text">
+          Publicado por:{" "}<span className="fw-medium text-dark">@{nickName}</span>
+        </p>
+      </div>
+
       {/* Cuerpo de la tarjeta */}
       <div className="card-body d-flex flex-column">
         <h5 className="publicacion-titulo">{titulo}</h5>
@@ -99,7 +90,7 @@ export const Publicacion = ({
 
         {/* Contenedor para las etiquetas (etiquetas) */}
         {etiquetas.length > 0 && (
-            <div className="mt-1 mb-2 d-flex flex-wrap gap-2">
+            <div className="mt-0 mb-1 d-flex flex-wrap">
             {etiquetas.map((tag, index) => (
                 <span
                 key={index}
