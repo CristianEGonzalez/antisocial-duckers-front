@@ -20,7 +20,7 @@ function PublicacionesRecientes() {
   const [posts, setPosts] = useState([]);
   const [cargando, setCargando] = useState(true); //Evaluar si lo dejamos o lo quitamos y también se borraría el finally
   const [error, setError] = useState(null);
-  const cantPublicacionesRecientes = import.meta.env.VITE_RECENT_POSTS;
+  const cantPublicacionesRecientes = import.meta.env.VITE_RECENT_POSTS || 6;
 
   useEffect(() => {
     const fetchPublicaciones = async () => {
