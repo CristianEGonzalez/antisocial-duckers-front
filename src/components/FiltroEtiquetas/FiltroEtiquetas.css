@@ -28,7 +28,7 @@
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 40px;
-  border: 1px solid #e9ecef; 
+  border: 1px solid #dddddd; 
   padding: 20px;
   border-radius: 10px;
   background-color: #ffffff;
@@ -47,14 +47,14 @@
 }
 
 .boton-etiqueta.activo {
-  background-color: #007bff; 
+  background-color: #198754; 
   color: white;
-  border-color: #007bff;
+  border-color: #198754;
   transform: translateY(-2px);
 }
 
 .boton-etiqueta:hover:not(.activo) {
-  background-color: #e2e6ea;
+  background-color: #a4c9b7;
   border-color: #b8c1cb;
 }
 

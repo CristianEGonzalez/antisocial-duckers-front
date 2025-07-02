@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Publicacion } from "../Publicacion/Publicacion";
 import { obtenerPublicaciones } from '../../services/postApi.js';
+import './PublicacionesRecientes.css';
 
 const obtenerPublicacionesRecientes = (publicaciones, cantidad) => {
   if (!publicaciones || publicaciones.length === 0) {
@@ -58,21 +59,25 @@ function PublicacionesRecientes() {
   }
 
   return (
-    <section className="p-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "space-around"}}>
-      {posts.map(post => (
-        <Publicacion
-          key={post.id}
-          idPublicacion={post.id}
-          nickName={post.User.nickName}
-          titulo={post.title || `Publicación #${post.id}`}
-          contenido={post.content}
-          imagenes={post.Post_Images.map(img => img.url)}
-          etiquetas={post.Tags.map(tag => tag.tag)}
-          cantidadComentarios={post.Comments.length}
-          urlVerMas={`/DetallePublicacionId/${post.id}`}
-        />
-      ))}
-    </section>
+    <div>
+      <h1>Feed</h1>
+      <section className="p-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "space-around"}}>
+        
+        {posts.map(post => (
+          <Publicacion
+            key={post.id}
+            idPublicacion={post.id}
+            nickName={post.User.nickName}
+            titulo={post.title || `Publicación #${post.id}`}
+            contenido={post.content}
+            imagenes={post.Post_Images.map(img => img.url)}
+            etiquetas={post.Tags.map(tag => tag.tag)}
+            cantidadComentarios={post.Comments.length}
+            urlVerMas={`/DetallePublicacionId/${post.id}`}
+          />
+        ))}
+      </section>
+    </div>
   );
 }
 

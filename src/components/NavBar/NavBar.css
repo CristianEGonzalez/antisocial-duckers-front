@@ -58,7 +58,7 @@
 }
 
 .nav-link-custom:hover {
-    color: #000;
+    color: #fff;
     background-color: #00c4b6;
     transform: translateY(-2px);
 }
@@ -112,7 +112,7 @@
 
 .dropdown-item-custom:hover {
     background-color: #f1f1f1;
-    color: #5a7d9a;
+    color: #198754;
 }
 
 .dropdown-divider-custom {
