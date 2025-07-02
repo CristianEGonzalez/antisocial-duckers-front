@@ -39,7 +39,7 @@ export default function Login() {
   
       setMensajeExito(`Bienvenid@ ${nickName}!`);
 
-      setTimeout(navigate, 3000, '/perfil');
+      setTimeout(navigate, 2000, '/perfil');
       
     } catch (err) {
       console.error("Error al iniciar sesión:", err.message);

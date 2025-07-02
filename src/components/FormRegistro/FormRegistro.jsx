@@ -38,7 +38,7 @@ function FormRegistro() {
       setEmail('');
       setError('');
 
-      setTimeout(navigate, 2500, '/login');
+      setTimeout(navigate, 2000, '/login');
 
     } catch (err) {
       console.error("Error en el registro:", err.message);

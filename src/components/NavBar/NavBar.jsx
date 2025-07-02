@@ -10,9 +10,9 @@ const Navbar = () => {
     const { usuario, logout } = useAuth();
     const navigate = useNavigate();
 
-    const cerrarSesion = () => {
-        logout();
-        navigate("/login"); //SOLO VUELVE AL LOGIN CUANDO EL USUARIO HACE LOGOUT DESDE SU PERFIL
+    const cerrarSesion = async () => {
+        await logout();
+        navigate('/login'); 
     };
 
     const toggleMobileMenu = () => {
