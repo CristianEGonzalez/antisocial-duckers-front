@@ -20,6 +20,7 @@ function PublicacionesRecientes() {
   const [posts, setPosts] = useState([]);
   const [cargando, setCargando] = useState(true); //Evaluar si lo dejamos o lo quitamos y también se borraría el finally
   const [error, setError] = useState(null);
+  const cantPublicacionesRecientes = import.meta.env.VITE_RECENT_POSTS;
 
   useEffect(() => {
     const fetchPublicaciones = async () => {
@@ -28,7 +29,7 @@ function PublicacionesRecientes() {
         const publicaciones = await obtenerPublicaciones();
         
         // --- Definimos cuántas publicaciones recientes se mostrarán en el home ---
-        const publicacionesRecientes = obtenerPublicacionesRecientes(publicaciones, 6);
+        const publicacionesRecientes = obtenerPublicacionesRecientes(publicaciones, cantPublicacionesRecientes);
         setPosts(publicacionesRecientes);
         // ---------------------------------
 
