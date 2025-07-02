@@ -59,8 +59,8 @@ function PublicacionesRecientes() {
   }
 
   return (
-    <div>
-      <h1>Feed</h1>
+    <div className='post-container'>
+      <h2 className='feed'>Publicaciones Recientes</h2>
       <section className="p-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "space-around"}}>
         
         {posts.map(post => (

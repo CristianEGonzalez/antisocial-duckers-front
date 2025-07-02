@@ -3,7 +3,7 @@ import Bienvenida from '../components/Bienvenida/Bienvenida'
 
 function Home() {
   return (
-    <div className="container mt-4">
+    <div>
         <Bienvenida/>
         <PublicacionesRecientes/>
     </div>    

@@ -4,7 +4,9 @@ export default function Bienvenida() {
 
   return (
     <section className="bienvenida"> 
-      <h1>Bienvenido a Antisocial DUCKERS NET</h1>
+      <div className='banner'>
+        <img src='DuckersBanner.png'></img>
+      </div>
     </section>
   );
 }
