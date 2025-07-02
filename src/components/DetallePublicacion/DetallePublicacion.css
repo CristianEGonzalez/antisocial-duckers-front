@@ -2,7 +2,9 @@
   height: calc(100vh - 300px);
 }
 
-.carousel-item.active, .carousel-item.carousel-item-start {
+.carousel-item.active,
+.carousel-item.carousel-item-start,
+.carousel-item.carousel-item-end {
   height: 100%;
   display: flex !important;
   align-items: center;

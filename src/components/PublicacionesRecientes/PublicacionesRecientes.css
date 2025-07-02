@@ -2,12 +2,3 @@
 .post-container{
     width: 100%;
 }
-
-.feed{
-    font-family: 'Inter', sans-serif;
-    background-color: #dddddd;
-    color: #00a52f;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.75);
-    text-transform: uppercase;
-    text-align: center;
-}
