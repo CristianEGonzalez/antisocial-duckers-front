@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Publicacion.css'
+import Etiquetas from '../Etiquetas/Etiquetas';
 
 // Componente funcional de React para la tarjeta con carrusel
 export const Publicacion = ({
@@ -89,18 +90,7 @@ export const Publicacion = ({
         </p>
 
         {/* Contenedor para las etiquetas (etiquetas) */}
-        {etiquetas.length > 0 && (
-            <div className="mt-0 mb-1 d-flex flex-wrap">
-            {etiquetas.map((tag, index) => (
-                <span
-                key={index}
-                className="badge bg-light text-body-tertiary px-2 py-2"
-                >
-                {`#${tag}`}
-                </span>
-            ))}
-            </div>
-        )}
+        <Etiquetas idPublicacion={idPublicacion}/>
 
         {/* Contenedor para la cantidad de comentarios */}
         <div className="text-muted mb-3 mt-auto publicacion-coment">
