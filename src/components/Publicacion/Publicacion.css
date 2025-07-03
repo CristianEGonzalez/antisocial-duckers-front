@@ -11,6 +11,10 @@
   transition: transform 0.2s;
 }
 
+.card-body{
+  padding: 0px 1rem !important;
+}
+
 .card:hover{
   transform: translateY(-3px);
 }

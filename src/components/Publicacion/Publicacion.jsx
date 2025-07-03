@@ -75,7 +75,7 @@ export const Publicacion = ({
       )}
 
       {/* Sección del nombre de usuario */}
-      <div className="px-4 pt-2">
+      <div className="px-3 pt-1">
         <p className="text-muted mb-0 publicacion-text">
           Publicado por:{" "}<span className="fw-medium text-dark">@{nickName}</span>
         </p>

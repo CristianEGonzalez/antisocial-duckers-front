@@ -15,7 +15,7 @@ export const Header = () => {
   };
 
   return (
-        <header className="navbar px-3 sticky-top" style={{ height: '100px', backgroundColor: "#dddddd"}}>
+        <header className="navbar px-3 sticky-top shadow-sm" style={{ height: '100px', backgroundColor: "#fff"}}>
       <div className="container-fluid">
         <NavLink to="/" onClick={handleClick}>
           <img src={logo} alt="Logo" width="120"/>

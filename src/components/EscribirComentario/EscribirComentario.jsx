@@ -36,8 +36,8 @@ const EscribirComentario = ({ postId, onComentarioCreado, userId }) => {
     };
 
     return (
-        <div className="card bg-white p-4 rounded-3 shadow-sm border border-light mb-4">
-            <h4 className="mb-3 text-dark">Agregar un comentario</h4>
+        <div className="bg-white p-4 rounded-3 shadow-sm">
+            <h4 className="mb-3">Agregar un comentario</h4>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <textarea
