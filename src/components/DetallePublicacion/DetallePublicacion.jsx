@@ -11,6 +11,7 @@ import Etiquetas from "../Etiquetas/Etiquetas";
 const DetallePublicacion = () => {
   const { id } = useParams();
   const [publicacion, setPublicacion] = useState(null);
+  const [comentarios, setComentarios] = useState(null);
   const [user, setUser] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -147,6 +148,8 @@ const DetallePublicacion = () => {
           <Comentarios
             usuario = {usuario}
             idPublicacion={id}
+            comentarios={comentarios}
+            setComentarios={setComentarios}
           />
         </div>
       </div>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import {obtenerComentariosDeUnaPublicacion, eliminarComentario} from "../../services/commentApi";
 
-const Comentarios = ({usuario, idPublicacion}) => {
-  const [comentarios, setComentarios] = useState(null);
+const Comentarios = ({usuario, idPublicacion, comentarios, setComentarios}) => {
   const [comentarioAEliminar, setComentarioAEliminar] = useState(null);
 
   useEffect(() => {
