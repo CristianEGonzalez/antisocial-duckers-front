@@ -1,17 +1,17 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { obtenerPublicacionPorId, obtenerTagsDeUnPost } from "../../services/postApi";
+import { obtenerPublicacionPorId } from "../../services/postApi";
 import { obtenerUsuarioPorId } from "../../services/userApi";
 import EscribirComentario from "../EscribirComentario/EscribirComentario";
 import { useAuth } from "../../context/AuthContext";
 import "./DetallePublicacion.css";
 import Comentarios from "../Comentarios/Comentarios";
+import Etiquetas from "../Etiquetas/Etiquetas";
 
 const DetallePublicacion = () => {
   const { id } = useParams();
   const [publicacion, setPublicacion] = useState(null);
   const [user, setUser] = useState(null);
-  const [etiquetas, setEtiquetas] = useState([])
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const { usuario, usuarioId } = useAuth();
@@ -22,10 +22,8 @@ const DetallePublicacion = () => {
         setCargando(true);
         const unaPublicacion = await obtenerPublicacionPorId(id);
         const unUsuario = await obtenerUsuarioPorId(unaPublicacion.userId);
-        const listaDeEtiquetas = await obtenerTagsDeUnPost(id)
         setPublicacion(unaPublicacion);
         setUser(unUsuario);
-        setEtiquetas(listaDeEtiquetas);
       } catch (err) {
         setError(
           "Error al cargar la publicación: " +
@@ -132,20 +130,11 @@ const DetallePublicacion = () => {
           <p className="text-muted">{publicacion.content}</p>
 
           {/* Contenedor para las etiquetas (etiquetas) */}
-          {etiquetas.length > 0 && (
-              <div className="mt-1 mb-2 d-flex flex-wrap gap-2">
-              {etiquetas.map((etiqueta, index) => (
-                  <span
-                  key={index}
-                  className="badge bg-success-subtle text-dark px-2 py-2"
-                  >
-                  {`#${etiqueta.tag}`}
-                  </span>
-              ))}
-              </div>
-          )}
+          <Etiquetas
+            idPublicacion={id}
+          />
 
-
+          {/* Campo para escribir comentario */}
           {usuario && (
             <EscribirComentario
               postId={publicacion.id}
@@ -154,6 +143,7 @@ const DetallePublicacion = () => {
             />
           )}
 
+          {/* Lista de Comentarios */}
           <Comentarios
             usuario = {usuario}
             idPublicacion={id}
