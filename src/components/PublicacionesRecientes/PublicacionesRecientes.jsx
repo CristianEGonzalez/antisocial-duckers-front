@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Publicacion } from "../Publicacion/Publicacion";
 import { obtenerPublicaciones } from '../../services/postApi.js';
-import './PublicacionesRecientes.css';
 
 const obtenerPublicacionesRecientes = (publicaciones, cantidad) => {
   if (!publicaciones || publicaciones.length === 0) {
