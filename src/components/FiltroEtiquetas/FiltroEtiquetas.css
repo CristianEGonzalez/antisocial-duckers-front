@@ -93,15 +93,6 @@
   font-weight: 600;
 }
 
-
-.contenedor-cuadricula-publicaciones {
-  display: grid;
-  gap: 25px;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  justify-content: center;
-}
-
-
 .mensaje-sin-publicaciones {
   grid-column: 1 / -1;
   text-align: center;
@@ -148,9 +139,5 @@
 
   .titulo-seccion-publicaciones {
     font-size: 1.3em;
-  }
-
-  .contenedor-cuadricula-publicaciones {
-    grid-template-columns: 1fr;
   }
 }

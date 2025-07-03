@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getTags } from '../../services/tagApi'; 
 import { useNavigate } from 'react-router-dom';
 import { crearPublicacion, asociarTagAPost } from '../../services/postApi'; 
-import { useAuth } from '../../context/AuthContext'; 
-import './CrearPublicacion.css';
+import { useAuth } from '../../context/AuthContext';
 
 function CrearPublicacion () {
   const [titulo, setTitulo] = useState('')

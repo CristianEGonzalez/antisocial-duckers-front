@@ -59,7 +59,7 @@ function PublicacionesRecientes() {
   }
 
   return (
-    <div className='post-container'>
+    <div>
       <section className="p-3" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: "space-around"}}>
         
         {posts.map(post => (
