@@ -70,7 +70,6 @@ function PublicacionesRecientes() {
             titulo={post.title || `Publicación #${post.id}`}
             contenido={post.content}
             imagenes={post.Post_Images.map(img => img.url)}
-            etiquetas={post.Tags.map(tag => tag.tag)}
             cantidadComentarios={post.Comments.length}
             urlVerMas={`/DetallePublicacionId/${post.id}`}
           />

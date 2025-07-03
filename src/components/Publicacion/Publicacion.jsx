@@ -10,7 +10,6 @@ export const Publicacion = ({
   contenido,
   urlVerMas,
   imagenes = [],
-  etiquetas = [],
   cantidadComentarios,
 }) => {
   // Validamos si hay imagenes en la publicacion
