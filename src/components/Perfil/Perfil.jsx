@@ -106,14 +106,14 @@ const Perfil = () => {
 
   return (
     <div className="container mt-5">
-      <div className="card bg-white p-4 rounded-3 shadow-sm border border-light mb-4 text-center">
-        <h2 className="profile-name text-dark mb-3">
+      <div className="p-2 rounded-3 shadow-sm border border-success-subtle text-center">
+        <h2>
           {`@${datosPerfilAmostrar.nickname}`}
         </h2>
       </div>
 
       <div className="profile-posts mt-5">
-        <h3 className="mb-4 text-dark">Tus Publicaciones</h3>
+        <h3 className="mb-1">Tus Publicaciones</h3>
         {publicaciones.length === 0 ? (
           <p className="text-muted text-center">Aún no hay publicaciones.</p>
         ) : (
@@ -133,7 +133,6 @@ const Perfil = () => {
                 titulo={post.title || `Publicación #${post.id}`}
                 contenido={post.content}
                 imagenes={post.Post_Images.map((img) => img.url)}
-                etiquetas={post.Tags.map((tag) => tag.tag)}
                 cantidadComentarios={post.Comments.length}
                 urlVerMas={`/DetallePublicacionId/${post.id}`}
               />
